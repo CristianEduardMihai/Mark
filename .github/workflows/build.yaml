@@ -4,6 +4,7 @@ on:
     release:
       types:
         - created
+    workflow_dispatch:
 
 defaults:
   run:
@@ -28,7 +29,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: 3.12
 
       - name: Install Python dependencies
         run: |
@@ -42,5 +43,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: app-${{ matrix.os }}
-          path: app/dist/app-${{ matrix.os }}*
+          path: dist/app-${{ matrix.os }}*
           if-no-files-found: error
