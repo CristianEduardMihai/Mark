@@ -31,3 +31,8 @@ pip install -r requirements.txt
 ```
 python3 main.py
 ```
+
+*Linux users might need to install tkinter via their package manager:
+```
+sudo apt install python3-tk
+```
