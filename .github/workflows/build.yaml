@@ -38,13 +38,6 @@ jobs:
 
       - name: Build with pyinstaller
         run: pyinstaller --onefile --name=mark-${{ matrix.os }} main.py
-
-      - name: Deploy artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: mark-${{ matrix.os }}
-          path: dist/mark-${{ matrix.os }}*
-          if-no-files-found: error
         
       - name: Upload Release Asset
         if: ${{ github.event_name == 'release' && github.event.action == 'created' }}
