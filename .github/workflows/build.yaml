@@ -37,11 +37,23 @@ jobs:
           pip install -r requirements.txt
 
       - name: Build with pyinstaller
-        run: pyinstaller --onefile --name=app-${{ matrix.os }} main.py
+        run: pyinstaller --onefile --name=mark-${{ matrix.os }} main.py
 
       - name: Deploy artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: app-${{ matrix.os }}
-          path: dist/app-${{ matrix.os }}*
+          name: mark-${{ matrix.os }}
+          path: dist/mark-${{ matrix.os }}*
           if-no-files-found: error
+        
+      - name: Upload Release Asset
+        if: ${{ github.event_name == 'release' && github.event.action == 'created' }}
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: dist/mark-${{ matrix.os }}.exe
+          asset_name: mark-${{ matrix.os }}.exe
+          asset_content_type: application/x-msdownload
