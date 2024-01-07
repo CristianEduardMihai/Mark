@@ -17,6 +17,11 @@ def load_config():
         print("Config file not found. Please create a 'config.json' file.")
         exit()
 
+def wait_for_keypress():
+    print("Press any key to exit.")
+    input()
+    exit()
+
 def print_progress_bar(iteration, total, length=50):
     progress = int(length * iteration // total)
     bar = ">" * progress + "-" * (length - progress)
@@ -30,8 +35,8 @@ def get_image_paths():
     root.destroy()
 
     if not file_paths:
-        print("No files selected. Exiting.")
-        exit()
+        print("No files selected.")
+        wait_for_keypress()
 
     # Check if all images are from the same folder
     folders = set(os.path.dirname(path) for path in file_paths)
@@ -98,6 +103,7 @@ def main():
         print_progress_bar(i, total_images)
 
     print("\nWatermarking complete. Check the 'watermarked' folder for the results.")
+    wait_for_keypress()
 
 if __name__ == "__main__":
     main()
