@@ -38,6 +38,9 @@ jobs:
 
       - name: Build with pyinstaller
         run: pyinstaller --onefile --name=mark-${{ matrix.os }} main.py
+      
+      - name: Tree
+        run: tree /f
 
       - name: Deploy artifacts
         uses: actions/upload-artifact@v2
