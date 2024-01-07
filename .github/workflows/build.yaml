@@ -1,11 +1,13 @@
 name: Build
 
-on: [push]
+on:
+    release:
+      types:
+        - created
 
 defaults:
   run:
     shell: bash
-    working-directory: app
 
 jobs:
   Build:
